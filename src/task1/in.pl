@@ -4,7 +4,7 @@ node(2, Ready, state).
 node(3, Drink, state).
 node(4, Eat, state).
 node(5, Family, state).
-node(6, Stop, state).
+node(6, Stop, stop).
 
 % Edge Table (startsAt, endsAt)
 edge(1, Start, Ready).

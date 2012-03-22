@@ -13,8 +13,8 @@ import java.util.List;
  */
 public class FSM {
 
-  List<Node> nodes = new ArrayList<Node>();
-  List<Edge> edges = new ArrayList<Edge>();
+  public List<Node> nodes = new ArrayList<Node>();
+  public List<Edge> edges = new ArrayList<Edge>();
 
   /**
    * Builds an FSM.

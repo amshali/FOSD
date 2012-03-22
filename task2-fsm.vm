@@ -11,14 +11,14 @@ digraph fsm {
 #foreach($node in $nodes)  
   #if ($node.type == "start")
     ${node.name} [label = "${node.name}", shape=doublecircle];
+  #elseif ($node.type == "stop")
+    ${node.name} [label = "${node.name}", shape=doubleoctagon];
   #else
     ${node.name} [label = "${node.name}"];
   #end
 #end
     
 #foreach($edge in $edges)
-  #if ($edge.startsAt == $node.name)
   ${edge.startsAt} -> ${edge.endsAt};
-  #end
 #end
 }
