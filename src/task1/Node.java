@@ -16,8 +16,6 @@ public class Node {
     return type;
   }
 
-
-
   @Override
   public int hashCode() {
     final int prime = 31;
