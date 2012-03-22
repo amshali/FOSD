@@ -11,10 +11,14 @@ import task1.FSM;
 
 public class Main {
   public static void main(String[] args) {
+    if (args.length != 2) {
+      System.out.println("Usage: input-prolog-filename output-filename");
+      System.exit(0);
+    }
     try {
       Velocity.init();
       VelocityContext context = new VelocityContext();
-      FSM fsm = new FSM(Main.class.getResource("/task1/in.pl").getPath());
+      FSM fsm = new FSM(args[0]);
 
       context.put("nodes", fsm.nodes);
 
@@ -23,10 +27,9 @@ public class Main {
       Template template = null;
 
       template = Velocity.getTemplate("task2-fsm.vm");
-      Writer writer = new FileWriter("fsm.dot");
+      Writer writer = new FileWriter(args[1]);
 
       template.merge(context, writer);
-
       writer.close();
     } catch (Exception e) {
       e.printStackTrace();
