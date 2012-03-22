@@ -13,6 +13,7 @@ public class Main {
   public static void main(String[] args) {
     if (args.length != 2) {
       System.out.println("Usage: input-prolog-filename output-filename");
+      System.out.println("The generated filename will be output-filename.dot");
       System.exit(0);
     }
     try {
