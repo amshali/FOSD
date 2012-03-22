@@ -1,0 +1,24 @@
+/*
+The command line is
+
+  dot -Tsvg fsm.dot > fsm.svg
+
+and the file is:
+*/
+digraph fsm {
+  node [shape=circle];
+
+#foreach($node in $nodes)  
+  #if ($node.type == "start")
+    ${node.name} [label = "${node.name}", shape=doublecircle];
+  #else
+    ${node.name} [label = "${node.name}"];
+  #end
+#end
+    
+#foreach($edge in $edges)
+  #if ($edge.startsAt == $node.name)
+  ${edge.startsAt} -> ${edge.endsAt};
+  #end
+#end
+}
