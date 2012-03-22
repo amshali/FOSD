@@ -67,7 +67,7 @@ public class Main {
    */
   public static void main(String[] args) {
     try {
-      Main m = new Main("in.pl");
+      Main m = new Main(Main.class.getResource("/task1/in.pl").getPath());
       Velocity.init();
 
       VelocityContext context = new VelocityContext();
@@ -78,7 +78,7 @@ public class Main {
 
       Template template = null;
 
-      template = Velocity.getTemplate("fsm.vm");
+      template = Velocity.getTemplate("task1-fsm.vm");
       StringWriter sw = new StringWriter();
 
       template.merge(context, sw);
