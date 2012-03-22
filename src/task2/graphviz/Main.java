@@ -27,7 +27,8 @@ public class Main {
       Template template = null;
 
       template = Velocity.getTemplate("task2-fsm.vm");
-      Writer writer = new FileWriter(args[1]);
+      Writer writer = new FileWriter(args[1]+".dot");
+      context.put("filename", args[1]);
 
       template.merge(context, writer);
       writer.close();
