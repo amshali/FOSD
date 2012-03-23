@@ -1,9 +1,3 @@
-/*
-The command line to create an SVG output is:
-
-  dot -Tsvg ${filename} > ${filename}.svg
-  
-*/
 digraph fsm {
   node [shape=circle];
 
