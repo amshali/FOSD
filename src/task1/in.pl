@@ -1,4 +1,5 @@
 % Node Table (ID, Name, Type)
+% schema:node,id,name,type
 node(1, Start, start).
 node(2, Ready, state).
 node(3, Drink, state).
@@ -7,6 +8,7 @@ node(5, Family, state).
 node(6, Stop, stop).
 
 % Edge Table (startsAt, endsAt)
+% schema:edge,id,startsAt,endsAt
 edge(1, Start, Ready).
 egde(2, Ready, Drink).
 edge(3, Drink, Drink).

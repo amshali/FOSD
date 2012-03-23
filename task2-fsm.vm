@@ -1,13 +1,13 @@
 /*
 The command line to create an SVG output is:
 
-  dot -Tsvg ${filename}.dot > ${filename}.svg
+  dot -Tsvg ${filename} > ${filename}.svg
   
 */
 digraph fsm {
   node [shape=circle];
 
-#foreach($node in $nodes)  
+#foreach($node in $nodeS)  
   #if ($node.type == "start")
     ${node.name} [label = "${node.name}", shape=doublecircle];
   #elseif ($node.type == "stop")
@@ -17,7 +17,7 @@ digraph fsm {
   #end
 #end
     
-#foreach($edge in $edges)
+#foreach($edge in $edgeS)
   ${edge.startsAt} -> ${edge.endsAt};
 #end
 }

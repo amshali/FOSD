@@ -1,4 +1,4 @@
-package task2.graphviz;
+package core;
 
 import java.io.FileWriter;
 import java.io.Writer;
@@ -7,11 +7,11 @@ import org.apache.velocity.Template;
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.Velocity;
 
+
 public class Main {
   public static void main(String[] args) {
     if (args.length != 3) {
       System.out.println("Usage: input-prolog-filename velocity-file output-filename");
-      System.out.println("The generated filename will be output-filename.dot");
       System.exit(0);
     }
     try {
@@ -26,7 +26,7 @@ public class Main {
       Template template = null;
 
       template = Velocity.getTemplate(args[1]);
-      Writer writer = new FileWriter(args[2]+".dot");
+      Writer writer = new FileWriter(args[2]);
       context.put("filename", args[2]);
 
       template.merge(context, writer);

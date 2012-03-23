@@ -4,14 +4,14 @@ class Current {
 
   public static Current current = new Start();  
 
-#foreach($node in $nodes)
+#foreach($node in $nodeS)
   public void goto${node.name}() {}
 #end
 }
 
-#foreach($node in $nodes) 
+#foreach($node in $nodeS) 
 class $node.name extends Current {
-#foreach($edge in $edges)
+#foreach($edge in $edgeS)
   #if ($edge.startsAt == $node.name)
   
   public void goto${edge.endsAt}() {

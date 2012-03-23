@@ -1,4 +1,4 @@
-package task2.graphviz;
+package core;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
@@ -60,20 +60,4 @@ public class Model {
       e.printStackTrace();
     }
   }
-  
-//  private static class TableEntry extends HashMap<String, String>{
-//    public Map<String,String> columns = new HashMap<String,String>();
-//    
-//    public String get(String s) {
-//      System.out.println("aaaaaaaaaaaaa");
-//      return columns.get(s);
-//    }
-//
-//    @Override
-//    public String toString() {
-//      return "TableEntry [columns=" + columns.keySet() + "]";
-//    }
-//    
-//    
-//  }
 }
