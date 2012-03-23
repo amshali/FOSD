@@ -9,8 +9,8 @@ import org.apache.velocity.app.Velocity;
 
 public class Main {
   public static void main(String[] args) {
-    if (args.length != 2) {
-      System.out.println("Usage: input-prolog-filename output-filename");
+    if (args.length != 3) {
+      System.out.println("Usage: input-prolog-filename velocity-file output-filename");
       System.out.println("The generated filename will be output-filename.dot");
       System.exit(0);
     }
@@ -25,9 +25,9 @@ public class Main {
 
       Template template = null;
 
-      template = Velocity.getTemplate("task2-fsm.vm");
-      Writer writer = new FileWriter(args[1]+".dot");
-      context.put("filename", args[1]);
+      template = Velocity.getTemplate(args[1]);
+      Writer writer = new FileWriter(args[2]+".dot");
+      context.put("filename", args[2]);
 
       template.merge(context, writer);
       writer.close();

@@ -11,8 +11,8 @@ import java.util.Map;
 
 public class Model {
 
-  public Map<String,List<TableEntry>> tables = 
-    new HashMap<String,List<TableEntry>>();
+  public Map<String,List<Map<String,String>>> tables = 
+    new HashMap<String,List<Map<String,String>>>();
   
   private Map<String,List<String>> schemas = 
     new HashMap<String,List<String>>();
@@ -28,13 +28,13 @@ public class Model {
         if (line.matches("%\\s*schema:.*")) {
           String[] names = line.split(":")[1].split(",");
           List<String> columnNames = new ArrayList<String>();
-          for (String name: names) columnNames.add(name);
-          schemas.put(columnNames.remove(0), columnNames);
+          for (String name: names) columnNames.add(name.trim());
+          schemas.put(columnNames.remove(0).trim(), columnNames);
         }
       }
       // Fill in tables from schema.
       for (String tableName: schemas.keySet()) {
-        tables.put(tableName + "S", new ArrayList<TableEntry>());
+        tables.put(tableName + "S", new ArrayList<Map<String,String>>());
       }
       // 2nd pass for table entries.
       br = new BufferedReader(new InputStreamReader(
@@ -43,15 +43,15 @@ public class Model {
       while ((line = br.readLine()) != null) {
         line = line.trim();
         if (line.matches("\\s*\\w+\\s*(.*)\\.")) {
-          String tableName = line.split("(")[0].trim();
+          String tableName = line.split("\\(")[0].trim();
           String[] columnNames = line.substring(
             line.indexOf("(") + 1, line.indexOf(")")).split(",");
           if (!schemas.containsKey(tableName)) continue;
-          List<TableEntry> entries = tables.get(tableName);
-          TableEntry newEntry = new TableEntry();
+          List<Map<String,String>> entries = tables.get(tableName+"S");
+          Map<String,String> newEntry = new HashMap<String,String>();
           for (int i = 0; i < schemas.get(tableName).size(); i++) {
-            newEntry.columns.put(
-              schemas.get(tableName).get(i), columnNames[i]);
+            newEntry.put(
+              schemas.get(tableName).get(i), columnNames[i].trim());
           }
           entries.add(newEntry);
         }
@@ -61,7 +61,19 @@ public class Model {
     }
   }
   
-  private static class TableEntry {
-    public Map<String,String> columns = new HashMap<String,String>();
-  }
+//  private static class TableEntry extends HashMap<String, String>{
+//    public Map<String,String> columns = new HashMap<String,String>();
+//    
+//    public String get(String s) {
+//      System.out.println("aaaaaaaaaaaaa");
+//      return columns.get(s);
+//    }
+//
+//    @Override
+//    public String toString() {
+//      return "TableEntry [columns=" + columns.keySet() + "]";
+//    }
+//    
+//    
+//  }
 }

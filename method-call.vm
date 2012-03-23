@@ -11,10 +11,12 @@ digraph G {
     node [style=dotted, shape=box];
     label="${class.name}";
   #foreach($method in $methodS)
-    #if($method.class == ${class.id})
-      ${method.id} [label="${method.name}"];
+    #if(${method.classid} == ${class.id})
+    
+    ${method.id} [label="${method.name}"];
     #end
   #end
+  
   }
 #end
 #foreach($invok in $invocationS)

@@ -5,7 +5,7 @@ class(c2, ClassB).
 class(c3, ClassC).
 
 % Methods
-% schema: method, id, class, name
+% schema: method, id, classid, name
 method(m1, c1, noCalls).
 method(m2, c1, recursive).
 method(m3, c2, back).
