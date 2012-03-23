@@ -4,20 +4,20 @@ digraph G {
   splines=true;
   ranksep=0.7;
   
-#foreach($class in $classes)
-  subgraph cluster_${class.ID} {
+#foreach($class in $classS)
+  subgraph cluster_${class.id} {
     color=grey;
     labeljust="l";
     node [style=dotted, shape=box];
-    label="${class.Name}";
-  #foreach($method in $methods)
-    #if($method.Class == ${class.ID})
-      ${method.ID} [label="${method.Name}"];
+    label="${class.name}";
+  #foreach($method in $methodS)
+    #if($method.class == ${class.id})
+      ${method.id} [label="${method.name}"];
     #end
   #end
   }
 #end
-#foreach($invok in $invocations)
+#foreach($invok in $invocationS)
   $invok.caller -> $invok.callee ;
 #end
 }

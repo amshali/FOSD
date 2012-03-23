@@ -7,8 +7,6 @@ import org.apache.velocity.Template;
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.Velocity;
 
-import task1.FSM;
-
 public class Main {
   public static void main(String[] args) {
     if (args.length != 2) {
@@ -19,11 +17,11 @@ public class Main {
     try {
       Velocity.init();
       VelocityContext context = new VelocityContext();
-      FSM fsm = new FSM(args[0]);
+      Model m = new Model(args[0]);
 
-      context.put("nodes", fsm.nodes);
-
-      context.put("edges", fsm.edges);
+      for (String tableName: m.tables.keySet()) {
+        context.put(tableName, m.tables.get(tableName));
+      }
 
       Template template = null;
 
