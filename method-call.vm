@@ -18,6 +18,6 @@ digraph G {
   }
 #end
 #foreach($invok in $invocations)
-  $invok.caller -> $invok.callee
+  $invok.caller -> $invok.callee ;
 #end
 }
