@@ -15,7 +15,7 @@ public class Main {
       System.exit(0);
     }
     try {
-      Velocity.init();
+      Velocity.init("velocity.properties");
       VelocityContext context = new VelocityContext();
       Model m = new Model(args[0]);
 
