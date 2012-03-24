@@ -1,0 +1,137 @@
+#set($MARKER="//----")
+${MARKER}src/docbook/DocBook.java
+package docbook;
+
+import java.util.*;
+
+class DocBookEntry {
+	protected List<String> auList = new ArrayList<String>();
+	protected String title;
+	protected String type;
+	protected String year = new String();
+	protected String className;
+	protected String note = new String();
+	
+	DocBookEntry(String title, String type, String className) {
+		this.title = title;
+		this.type = type;
+		this.className = className;
+	}
+	
+	public void setAuthorList(List<String> auList) {
+		this.auList = new ArrayList<String>(auList);
+	}
+	
+	public void setYear(String year) {
+		this.year = year;
+	}
+	
+	public void setNote(String note) {
+		this.note = note;
+	}
+	
+	public String getTitle() {
+		return(title);
+	}
+	
+	public void printTitle() {
+		System.out.println(title);
+	}
+	
+	public List<String> getAuthorList() {
+		return(auList);
+	}
+		
+	public String getAuthorListString() {
+		String authors = new String(); 
+		for (String author: auList) {
+			authors = authors + "," + author;
+		}
+		if (authors.length() > 0) {
+			return(authors.substring(1));
+		}
+		
+		return authors;
+	}
+	
+	public void printAuthorList() {
+		System.out.println(getAuthorListString());
+	}
+	
+	public void printYear() {
+		System.out.println(year);
+	}
+	
+	public String getFullDescription() {
+		String descript = "[" + className + "] " + 
+			type + " " + getTitle() + " " + getAuthorListString() + 
+			" " + year + " " + note;
+		descript = descript.replaceAll("\\s+", " ");
+		return(descript);
+	}
+}
+
+#set($MARKER="//----")
+${MARKER}src/docbook/Main.java
+package docbook;
+
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args) {
+        List<DocBookEntry> dbList = new ArrayList<DocBookEntry>();
+        List<String> auList = new ArrayList<String>();
+			
+#foreach($bibtex in $bibtexS) 
+        DocBookEntry $bibtex.name = new DocBookEntry(
+#foreach($title in $titleS)
+#if ($title.id == $bibtex.id)
+            new String($title.name),
+#end
+#end
+            $bibtex.type, new String("${bibtex.name}"));
+	
+#foreach($year in $yearS)
+#if ($year.id == $bibtex.id)
+        ${bibtex.name}.setYear($year.number);
+#end
+#end
+
+        auList.clear();
+#foreach($author in $authorS)
+#if ($author.id == $bibtex.id)
+        auList.add(${author.lastname} + ", " + ${author.firstname});
+#end
+#end
+        ${bibtex.name}.setAuthorList(auList);
+
+#foreach($note in $noteS)
+#if ($note.id == $bibtex.id)
+        ${bibtex.name}.setNote($note.name);
+#end
+#end
+	
+        dbList.add(${bibtex.name});
+#end
+    
+        SortedSet<String> aList = new TreeSet<String>();
+        SortedSet<String> titleList = new TreeSet<String>();
+			
+        System.out.println("Reference List:");
+        for (DocBookEntry bt : dbList) {
+            System.out.println(bt.getFullDescription());
+            aList.addAll(bt.getAuthorList());
+            titleList.add(bt.getTitle());
+        }
+	
+        System.out.println("\nAuthor List:");
+        for (String author: aList) {
+            System.out.println(author);
+        }
+	
+        System.out.println("\nTitle List:");
+        for (String title: titleList) {
+            System.out.println(title);
+        }
+    }
+}

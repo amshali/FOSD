@@ -1,0 +1,41 @@
+#set($MARKER="//----")
+${MARKER}src/bibtex/BibTexEntry.java
+package bibtex;
+interface BibTexEntry {
+    public String getEntryDescription();
+}
+
+#foreach($bibtex in $bibtexS) 
+${MARKER}src/bibtex/${bibtex.type}.java
+package bibtex;
+import java.util.*;
+class $bibtex.type implements BibTexEntry {
+#foreach($field in $fieldS) 
+#if($field.id == $bibtex.id)
+    private $field.type $field.name;
+#end
+#end
+
+#foreach($field in $fieldS) 
+#if($field.id == $bibtex.id)
+    public ${field.type} get${field.name}() {
+        return(${field.name});
+    }
+#end
+#end
+
+#foreach($field in $fieldS) 
+#if($field.id == $bibtex.id)
+    public void set${field.name}($field.type $field.name) {
+        this.${field.name} = $field.name;
+    }
+#end
+#end
+
+    public String getEntryDescription() {
+        //TODO: Implement
+        return(new String());
+    }
+}
+#end
+    
