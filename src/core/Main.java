@@ -54,7 +54,9 @@ public class Main {
             out.close();
           }
           filename = line.substring(marker.length());
-          out = new PrintStream(new File(filename));
+          File f = new File(filename);
+          f.getParentFile().mkdirs();
+          out = new PrintStream(f);
         } else {
           if (out != null)
             out.println(line);
