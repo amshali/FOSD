@@ -1,0 +1,64 @@
+#set($MARKER="//----")
+${MARKER}src/SushiMenu/MenuItem.java
+package SushiMenu;
+
+import java.util.*;
+
+public class MenuItem {
+    private Set<String> ingredients;
+    private String name;
+    private double cost;
+    
+    MenuItem(String name) {
+        cost = 0;
+        this.name = name;
+        ingredients = new HashSet<String>();
+    }
+    
+    public void addIngredient(String name, double cost) {
+        if (ingredients.add(name)) {
+            this.cost += cost;
+        }
+    }
+    
+    public Set<String> getIngredients() {
+        return ingredients;
+    }
+        
+    public String getName() {
+        return name;
+    }
+    
+    public double getCost() {
+        return cost;
+    }
+}
+
+${MARKER}src/SushiMenu/Main.java
+package SushiMenu;
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args) {
+        List<MenuItem> sushiMenu = new ArrayList<MenuItem>();
+                
+#foreach($menuItem in $menuItemS)
+        MenuItem $menuItem.name = new MenuItem("${menuItem.name}");
+ #foreach($ingredientsUsed in $ingredientsUsedS)
+  #if($ingredientsUsed.menuID == $menuItem.id)
+   #foreach($ingredient in $ingredientS)
+    #if($ingredientsUsed.ingredientID == $ingredient.id)
+    ${menuItem.name}.addIngredient("${ingredient.name}", $ingredient.cost);
+    #end
+   #end
+  #end
+#end
+    sushiMenu.add(${menuItem.name});
+    
+#end
+        for (MenuItem item : sushiMenu) {
+            System.out.println(item.getName() + ", " + item.getCost());
+        }
+    }
+}
+    
