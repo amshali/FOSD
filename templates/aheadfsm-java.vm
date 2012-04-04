@@ -1,0 +1,138 @@
+#set($MARKER="//----")
+#foreach($stateMachine in $stateMachineS)
+${MARKER}src/aheadfsm/${stateMachine.name}.java
+package aheadfsm;
+
+public class ${stateMachine.name} {
+    static int stateNumGenerator = 0;
+    final static int start = stateNumGenerator++;
+    final static int stop = stateNumGenerator++;
+#foreach($state in $stateS)
+    final static int $state.name = stateNumGenerator++;
+#end    
+
+    // Set the start and stop states
+    protected int current_state = start;
+    
+    final public boolean atStop() {
+        return current_state == stop;
+    }
+    
+    public String getState() {
+        if (current_state == start) return "start";
+        if (current_state == stop) return "stop";
+    #foreach($state in $stateS) 
+    if (current_state == $state.name) return "${state.name}";
+    #end
+    return "Unrecognizable_State";
+    }
+    
+#foreach($deliveryParam in $deliveryParameterS)
+    protected interface disp {
+        void exit($deliveryParam.type $deliveryParam.name);
+    }
+    
+    protected disp dispatch = new disp() {
+        public void exit($deliveryParam.type $deliveryParam.name) {
+            start_exit($deliveryParam.name);
+        }
+    };
+    
+    //delivery method
+    public void delivery($deliveryParam.type $deliveryParam.name) {
+        if (current_state == start) { start_prepare($deliveryParam.name); start_branches($deliveryParam.name); return;}
+        if (current_state == stop) { stop_prepare($deliveryParam.name); stop_branches($deliveryParam.name); return;}
+    #foreach($state in $stateS) 
+    if (current_state == $state.name) { ${state.name}_prepare($deliveryParam.name); ${state.name}_branches($deliveryParam.name); return;}
+    #end
+    #foreach($unknownState in $unknownStateS) 
+    ${unknownState.action}($deliveryParam.name);
+    #end
+    }
+    
+    #foreach($transition in $transitionS)
+    // methods for transition $transition.name
+    void ${transition.name}_action($deliveryParam.type $deliveryParam.name) { ${transition.action};}
+    boolean ${transition.name}_test($deliveryParam.type $deliveryParam.name) { return ${transition.condition};}
+    #end
+    
+    #foreach($state in $stateS) 
+    // methods for state $state.name
+    void ${state.name}_branches($deliveryParam.type $deliveryParam.name) {
+        #foreach($transition in $transitionS)
+            #if ($transition.start == $state.name)
+        if (${transition.name}_test($deliveryParam.name)) { ${state.name}_exit($deliveryParam.name); ${transition.name}_action($deliveryParam.name); ${transition.end}_enter($deliveryParam.name); return; }
+            #end
+        #end
+        if (starBranches($deliveryParam.name)) ${state.name}_otherwise($deliveryParam.name);
+    }
+    void ${state.name}_enter($deliveryParam.type $deliveryParam.name) {
+        current_state = $state.name;
+        dispatch = new disp() { public void exit($deliveryParam.type $deliveryParam.name) { ${state.name}_exit($deliveryParam.name); } };
+    #foreach($enter in $enterS)
+        #if ($enter.state == $state.name)
+        $enter.code;
+        #end
+    #end
+        ${state.name}_enter_user($deliveryParam.name);
+    }
+    void ${state.name}_enter_user($deliveryParam.type $deliveryParam.name) { ;
+    }
+    void ${state.name}_exit($deliveryParam.type $deliveryParam.name) {
+    #foreach($exit in $exitS)
+        #if ($exit.state == $state.name)
+        $exit.code;
+        #end
+    #end
+    }
+    void ${state.name}_otherwise($deliveryParam.type $deliveryParam.name) { otherwise_Default($deliveryParam.name); }
+    void ${state.name}_prepare($deliveryParam.type $deliveryParam.name) {
+    #foreach($prepare in $prepareS)
+        #if ($prepare.state == $state.name)
+        $prepare.code;
+        #end
+    #end
+    }
+    
+    #end
+    
+    // otherwise_Default method
+    void otherwise_Default($deliveryParam.type $deliveryParam.name) {}
+    boolean starBranches($deliveryParam.type $deliveryParam.name) { return true; }
+
+    // methods for state start
+    void start_branches($deliveryParam.type $deliveryParam.name) {
+        if (starBranches($deliveryParam.name)) start_otherwise($deliveryParam.name);
+    }
+    void start_enter($deliveryParam.type $deliveryParam.name) {
+        current_state = start;
+        dispatch = new disp() { public void exit($deliveryParam.type $deliveryParam.name) {start_exit($deliveryParam.name);} };
+        start_enter_user($deliveryParam.name);
+    }
+    void start_enter_user($deliveryParam.type $deliveryParam.name) {;}
+    void start_exit($deliveryParam.type $deliveryParam.name) {;}
+    void start_otherwise($deliveryParam.type $deliveryParam.name) { otherwise_Default($deliveryParam.name); }
+    void start_prepare($deliveryParam.type $deliveryParam.name) {;}
+    
+        // methods for state start
+    void stop_branches($deliveryParam.type $deliveryParam.name) {
+        if (starBranches($deliveryParam.name)) stop_otherwise($deliveryParam.name);
+    }
+    void stop_enter($deliveryParam.type $deliveryParam.name) {
+        current_state = stop;
+        dispatch = new disp() { public void exit($deliveryParam.type $deliveryParam.name) {stop_exit($deliveryParam.name);} };
+        stop_enter_user($deliveryParam.name);
+    }
+    void stop_enter_user($deliveryParam.type $deliveryParam.name) {;}
+    void stop_exit($deliveryParam.type $deliveryParam.name) {;}
+    void stop_otherwise($deliveryParam.type $deliveryParam.name) { otherwise_Default($deliveryParam.name); }
+    void stop_prepare($deliveryParam.type $deliveryParam.name) {;}
+#end
+
+#foreach($method in $methodS)
+    $method.name {
+        $method.code;
+    }
+#end
+}
+#end
