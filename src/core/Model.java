@@ -45,7 +45,7 @@ public class Model {
         if (line.matches("\\s*\\w+\\s*(.*)\\.")) {
           String tableName = line.split("\\(")[0].trim();
           String[] columnNames = line.substring(
-            line.indexOf("(") + 1, line.indexOf(")")).split(",");
+            line.indexOf("(") + 1, line.lastIndexOf(")")).split(",");
           if (!schemas.containsKey(tableName)) continue;
           List<Map<String,String>> entries = tables.get(tableName+"S");
           Map<String,String> newEntry = new HashMap<String,String>();
