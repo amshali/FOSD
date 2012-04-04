@@ -1,0 +1,13 @@
+#foreach($family in $familyS)
+#foreach($member in $memberS)    
+#set($isMale = ${member.fatherFamilyId} == ${family.id} 
+    || ${member.sonFamilyId} == ${family.id})
+#set($isFemale = ${member.motherFamilyId} == ${family.id} 
+    || ${member.daughterFamilyId} == ${family.id})        
+#if($isMale)
+Mr. ${member.firstname} ${family.lastname}
+#elseif($isFemale)
+Mrs. ${member.firstname} ${family.lastname}    
+#end
+#end
+#end
