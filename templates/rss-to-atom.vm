@@ -1,0 +1,75 @@
+#set($MARKER="//----")
+${MARKER}src/rss2atom/atom.pl
+#set($atomVal = 1)
+#set($entryVal = 1)
+#set($rssID = 'null')
+#set($lastBuildDate = 'null')
+## Loop through the atoms
+#foreach($rss in $rssS)
+#set($atomID = 'atom' + $atomVal)
+atom($atomID, id, -).
+## for each channel associated with this atom
+#foreach($channel in $channelS)
+#if($rss.channel == $channel.id)
+## for title, image and link they stay the same
+#if($channel.name == 'title' || $channel.name == 'image' || $channel.name == 'link')
+atom($atomID, $channel.name, $channel.value).
+#end
+## fill in the other transformations
+#if($channel.name == 'description')
+atom($atomID, subtitle, $channel.value).
+#end
+#if($channel.name == 'copyright')
+atom($atomID, rights, $channel.value).
+#end
+#if($channel.name == 'textInput')
+atom($atomID, logo, $channel.value).
+#end
+#if($channel.name == 'lastBuildDate')
+atom($atomID, lastUpdate, $channel.value).
+#set($lastBuildDate = $channel.value)
+#end
+#if($channel.name == 'managingEditor')
+atom($atomID, author, $channel.value).
+#end
+#if($channel.name == 'webmaster')
+atom($atomID, authorEmail, $channel.value).
+#end
+#if($channel.name == 'item')
+
+#set($entryID = 'entry' + $entryVal)
+#foreach($item in $itemS)
+## if they're the same items convert to entry
+#if($item.id == $channel.value)
+#if($item.name == 'title' || $item.name == 'link')
+entry($entryID, $atomID, $item.name, $item.value).
+#end
+#if($item.name == 'guid')
+entry($entryID, $atomID, id, $item.value).
+#end
+#if($item.name == 'comments')
+entry($entryID, $atomID, summary, $item.value).
+#end
+#end
+## end foreach items
+#end
+entry($entryID, $atomID, rights, -).
+entry($entryID, $atomID, lastUpdate, $lastBuildDate).
+#set($entryVal = $entryVal + 1)
+## end for channel.name == item
+#end
+## end for channel = atomid
+#end
+##end channel
+#end
+
+## Print the categories associated with the atom
+#foreach($category in $categoryS)
+#if($category.rssID == $rss.id)
+category($category.catID, $atomID, scheme, $category.scheme).
+category($category.catID, $atomID, label, $category.label).
+#end
+#end
+#set($atomVal = $atomVal + 1)
+
+#end    
