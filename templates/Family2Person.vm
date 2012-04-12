@@ -1,3 +1,4 @@
+#macro( strip $s )${s.replace("'", "")}#end
 #foreach($family in $familyS)
 #foreach($member in $memberS)    
 #set($isMale = ${member.fatherFamilyId} == ${family.id} 
@@ -5,9 +6,11 @@
 #set($isFemale = ${member.motherFamilyId} == ${family.id} 
     || ${member.daughterFamilyId} == ${family.id})        
 #if($isMale)
-Mr. ${member.firstname} ${family.lastname}
+Mr. #strip(${member.firstname}) #strip(${family.lastname})
+
 #elseif($isFemale)
-Mrs. ${member.firstname} ${family.lastname}    
+Mrs. #strip(${member.firstname}) #strip(${family.lastname})
+    
 #end
 #end
 #end
