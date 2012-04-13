@@ -1,0 +1,8 @@
+#macro( strip $s )${s.replace("'", "")}#end
+#foreach($rootA in $rootAS)
+rootB(bID).
+elementA(bID, 'B_#strip(${rootA.name})').
+#foreach($elementA in $elementAS)
+elementA(bID, 'B_#strip(${elementA.name})').
+#end
+#end
