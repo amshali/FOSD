@@ -1,7 +1,7 @@
 % Classes
 % schema: clazz, id, name
-class(c1, 'A').
-class(c2, 'B').
+clazz(c1, A).
+clazz(c2, B).
 
 % Attributes
 % schema: attribute, id, clazz, name, type
@@ -11,6 +11,6 @@ attribute(al3, c2, attr2, d3).
 
 % Data Types
 % schema: dataType, id, name
-dataType(d1, 'Boolean').
-dataType(d2, 'Integer').
-dataType(d3, 'String').
+dataType(d1, Boolean).
+dataType(d2, Integer).
+dataType(d3, String).
