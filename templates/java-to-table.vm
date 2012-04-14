@@ -1,5 +1,5 @@
-set($MARKER="//----")
-${MARKER}MethodCaller.java
+#set($MARKER="//----")
+${MARKER}src/j2t/MethodCaller.java
 public class MethodCaller {
 #foreach($method in $methodS)
   
@@ -20,7 +20,7 @@ public class MethodCaller {
 #set($tmp = ${class.name})
 #end
 #end
-${MARKER}${tmp}_${methodOuter.name}.java
+${MARKER}src/j2t/${tmp}_${methodOuter.name}.java
 class ${tmp}_${methodOuter.name} extends MethodCaller {
 #foreach($method in $methodS)
 #set($tmp2 = 0)
