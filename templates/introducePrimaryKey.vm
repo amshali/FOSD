@@ -1,0 +1,18 @@
+#set($MARKER="//----")
+#foreach($class in $classS)
+${MARKER}src/ipk/${clazz.name}.java
+class ${clazz.name} {
+#foreach($attribute in $attributeS)
+#foreach($dataType in $dataTypeS)
+#if($attribute.type == $dataType.name)
+  public ${attribute.type} ${attribute.name};
+#end
+#end
+#end
+  private Integer primaryKey;
+  
+  public Integer getPrimaryKey() {
+    return this.primaryKey;
+  }
+}
+#end
