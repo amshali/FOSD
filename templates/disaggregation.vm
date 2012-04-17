@@ -2,8 +2,7 @@
 #macro( getDatatypeName $datatypeid )
 #foreach($datatype in $datatypeS) 
 #if($datatype.id == $datatypeid)#strip(${datatype.name})#end
-#end
-#end
+#end#end
 #foreach($pkg in $pkgS)
 package #strip(${pkg.name}) {
 #foreach($cls in $clsS)
@@ -12,38 +11,31 @@ package #strip(${pkg.name}) {
 #foreach($attribute in $attributeS)
 #if(${attribute.classOrLabel} == ${cls.id})
         attribute #strip(${attribute.name}) : #getDatatypeName(${attribute.type});
-#end
-#end
+#end#end
 #foreach($label in $labelS)
 #if(${label.parentClass} == ${cls.id})
         reference ref${label.id}#strip(${label.name}) : #strip(${label.name}) oppositeOf ref#strip(${cls.name});
-#end
-#end
+#end#end
     }
-#end
-#end
+#end#end
 #foreach($label in $labelS)
 #set($parentClass = "")
 #foreach($cls in $clsS)
 #if($cls.id == $label.parentClass)
 #set($parentClass = $cls)
-#end
-#end
+#end#end
 #if(${parentClass.parentPackage} == ${pkg.id})
     class #strip($label.name) {
 #foreach($attribute in $attributeS)
 #if(${attribute.classOrLabel} == ${label.id})
         attribute #strip(${attribute.name}) : #getDatatypeName(${attribute.type});
-#end
-#end
+#end#end
         reference ref#strip(${parentClass.name}) : #strip(${parentClass.name}) oppositeOf ref${label.id}#strip(${label.name});
     }
-#end
-#end
+#end#end
 #foreach($datatype in $datatypeS)
 #if (${pkg.id} == ${datatype.parentPackage})
     datatype #strip(${datatype.name});
-#end
-#end
+#end#end
 }
 #end
