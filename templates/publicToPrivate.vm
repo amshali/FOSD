@@ -1,0 +1,16 @@
+#macro( strip $s )${s.replace("'", "")}#end
+#macro( titleCase $s )${s.toUpperCase().charAt(0)}${s.substring(1)}#end
+#foreach($attr in $attributeS)
+private ${attr.type} ${attr.name};
+public ${attr.type} get#titleCase(${attr.name})() {
+  return ${attr.name}; 
+}
+
+#set($isChangeable = ${attr.changeability} == "changeable")
+#if($isChangeable)
+public void set#titleCase(${attr.name})(${attr.type} ${attr.name}) {
+  this.${attr.name} = ${attr.name}; 
+}
+
+#end
+#end
