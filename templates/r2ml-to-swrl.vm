@@ -1,0 +1,162 @@
+#set($MARKER="//----")
+${MARKER}src/r2ml2swrl/Variable.java
+package r2ml2swrl;
+
+public class Variable {
+    public String id;
+    public String name;
+    
+    Variable(String id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+    
+    void printVar() {
+        System.out.println("variables(" + id + "," + name + ").");
+    }
+}
+
+${MARKER}src/r2ml2swrl/Relationship.java
+package r2ml2swrl;
+
+public class Relationship {
+    public String rel;
+    public Variable v1;
+    public Variable v2;
+    
+    Relationship(String rel, Variable v1, Variable v2) {
+        this.rel = rel;
+        this.v1 = v1;
+        this.v2 = v2;
+    }
+}
+
+${MARKER}src/r2ml2swrl/Atom.java
+package r2ml2swrl;
+
+import java.util.*;
+
+public class Atom {
+    public String id;
+    List<Relationship> rel;
+
+    Atom(String id) {
+       this.id = id;
+        rel = new ArrayList<Relationship>();
+    }
+
+    void addRelationship(Relationship r) {
+        rel.add(r);
+    }
+
+    void printAtom() {
+        for (Relationship r : rel) {
+            System.out.println("atom(" + id + "," + r.rel + "," + r.v1.id + "," + r.v2.id + ").");
+        }
+    }
+}
+
+${MARKER}src/r2ml2swrl/SWRLAtom.java
+package r2ml2swrl;
+
+import java.util.*;
+public class SWRLAtom {
+    public String name;
+    public String id;
+    List<Atom> atoms;
+        
+    SWRLAtom(String id, String name) {
+        this.name = name;
+        this.id = id;
+        atoms = new ArrayList<Atom>();
+    }
+
+    void addAtom(Atom a) {
+        atoms.add(a);
+    }
+
+    void printSWRLAtom() {
+        for (Atom a : atoms) {
+            System.out.println(name + "(" + id + "," + a.id + ").");
+            a.printAtom();
+        }
+    }
+}
+    
+${MARKER}src/r2ml2swrl/SWRL.java
+package r2ml2swrl;
+
+public class SWRL {    
+    public SWRLAtom b;
+    public SWRLAtom h;
+    
+    SWRL(SWRLAtom b, SWRLAtom h) {
+        this.b = b;
+        this.h = h;
+    }
+    
+    void printSWRL() {
+        System.out.println("implies(" + b.id + "," + h.id + ").");
+        b.printSWRLAtom();
+        h.printSWRLAtom();
+    }
+}
+
+## Instantiate all the individual files
+${MARKER}src/r2ml2swrl/Main.java
+package r2ml2swrl;
+
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args) {
+        List<SWRL> swrlObj = new ArrayList<SWRL>();
+        List<Variable> vars = new ArrayList<Variable>();
+#set($bodyVal = 1)
+
+#foreach($r2mlrulebase in $r2mlrulebaseS)
+#set($swrlID = 'swrl' + $bodyVal)
+#set($bodyID = 'body' + $bodyVal)
+#set($headID = 'head' + $bodyVal)
+        SWRLAtom $bodyID = new SWRLAtom("${bodyID}", "body");
+        SWRLAtom $headID = new SWRLAtom("${headID}", "head");
+        SWRL $swrlID = new SWRL($bodyID, $headID);
+        swrlObj.add($swrlID);
+
+## Create the variables
+#foreach($variable in $variablesS)
+        Variable ${variable.vID} = new Variable("$variable.vID", "$variable.vName");
+        vars.add(${variable.vID});
+#end
+
+## Atoms are composed of relationships
+#foreach($rpa in $referencePropertyAtomS)
+        Atom ${rpa.aID} = new Atom("${rpa.aID}");
+## match sID to get the variable ID
+#foreach($subject in $subjectS)
+#if($subject.sID == $rpa.sID)
+#foreach($obj in $objS)
+#if($obj.oID == $rpa.oID)
+        ${rpa.aID}.addRelationship(new Relationship("$rpa.rel", $obj.vID, $subject.vID));
+#end#end#end#end#end
+
+## Now add items to the body
+#foreach($cj in $conjunctionS)
+        ${bodyID}.addAtom(${cj.aID});
+#end
+
+## Now add items to the head
+#foreach($lf in $logicalFormulaS)
+#if($lf.lType == 'consequent')
+        ${headID}.addAtom(${lf.pID});
+#end#end
+#set($bodyVal = $bodyVal + 1)
+#end
+        for (SWRL sw : swrlObj) {
+            sw.printSWRL();
+        }
+        for (Variable v : vars) {
+            v.printVar();
+        }
+    }
+}
