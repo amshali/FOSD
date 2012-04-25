@@ -1,8 +1,15 @@
 
-% schema:attribute, id, name, visibility, type, scope, changeability
-attribute(att1, name, public, String, instance, changeable).
-attribute(att2, initialMarking, public, boolean, instance, changeable).
-attribute(att3, size, public, int, instance, changeable).
-attribute(att4, ratio, public, boolean, class, frozen).
+% schema:attribute, attID, classID, attName, visibility, isSpecification, ownerScope, changeability, datatype
+attribute(att1, class1, name, public, false, instance, changeable, dat1).
+attribute(att2, class1, initialMarking, public, false, instance, frozen, dat2).
+attribute(att3, class2, name, public, false, instance, changeable, dat1).
 
+
+% schema:class, classID, className, visibility, isSpecification, isRoot, isLeaf, isAbstract, isActive
+class(class1, 'Place', public, false, false, false, false, false).
+class(class2, 'Transition', public, false, false, false, false, false).
+
+% schema:dataType, dataTypeID, name, isSpec, isRoot, isLeaf, isAbstract
+dataType(dat1, string, false, false, false, false).
+dataType(dat2, integer, false, false, false, false).
 

@@ -1,16 +1,26 @@
 #macro( strip $s )${s.replace("'", "")}#end
 #macro( titleCase $s )${s.toUpperCase().charAt(0)}${s.substring(1)}#end
+#macro( getDatatypeName $datatypeid )
+#foreach($datatype in $dataTypeS) 
+#if($datatype.dataTypeID == $datatypeid)#strip(${datatype.name})#end
+#end#end
+#foreach($clazz in $classS)
+$clazz.visibility class #strip($clazz.className) {
 #foreach($attr in $attributeS)
-private ${attr.type} ${attr.name};
-public ${attr.type} get#titleCase(${attr.name})() {
-  return ${attr.name}; 
-}
-
+#if($attr.classID == $clazz.classID)
+  private #getDatatypeName(${attr.datatype}) ${attr.attName};
+  public #getDatatypeName(${attr.datatype}) get#titleCase(${attr.attName})() {
+    return ${attr.attName}; 
+  }
 #set($isChangeable = ${attr.changeability} == "changeable")
 #if($isChangeable)
-public void set#titleCase(${attr.name})(${attr.type} ${attr.name}) {
-  this.${attr.name} = ${attr.name}; 
-}
+  public void set#titleCase(${attr.attName})(#getDatatypeName(${attr.datatype}) ${attr.attName}) {
+    this.${attr.attName} = ${attr.attName}; 
+  }
 
 #end
+#end
+#end
+}
+
 #end
