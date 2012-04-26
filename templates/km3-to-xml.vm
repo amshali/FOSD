@@ -1,0 +1,71 @@
+#set($MARKER="//----")
+${MARKER}src/km32xml/JavaAbstractSyntax.xml
+#foreach($package in $packageS)
+<Metamodel>
+ <Package name="${package.name}">
+#foreach($class in $classS)
+#if(${class.pID} == ${package.id})
+#set($st = "")
+#set($stCount = 0)
+## locate the class extension type
+#foreach($extend in $extendsS)
+#if(${extend.cId} == ${class.id})
+## stuff to get the supertypes set correctly
+#if($stCount > 0)
+#set($st = $st + ", ")
+#end
+#set($st = $st + "${package.name}::${extend.pName}")
+#set($stCount = $stCount + 1)
+#end#end
+  <Class name="${class.name}" isAbstract="${class.isAbstract}" supertypes="$st">
+#foreach($attr in $attributeS)
+#if(${attr.cID} == ${class.id})
+## iterate through the data types, then classes
+#foreach($dt in $datatypeS)
+#if(${attr.type} == ${dt.name})
+#foreach($pk in $packageS)
+#if(${pk.id} == ${dt.pID})
+#set($pkType = $pk.name)
+#end#end#end#end
+#foreach($enum in $enumerationS)
+#if(${attr.type} == ${enum.name})
+#foreach($pk in $packageS)
+#if(${pk.id} == ${enum.pID})
+#set($pkType = $pk.name)
+#end#end#end#end
+   <Attribute name="${attr.name}", lower="1", upper="1", isOrdered="false", isUnique="false", type="$pkType::${attr.type}"/>
+#end#end
+## loop through the references associated with the class
+#foreach($ref in $referenceS)
+#if(${ref.cID} == ${class.id})
+#if(${ref.cardinality} == 1)
+#set($lower = 1)
+#set($upper = 1)
+#end
+#if(${ref.cardinality} == '*')
+#set($lower = 0)
+#set($upper = -1)
+#end
+   <Reference name="${ref.name}", lower="$lower", upper="$upper", isOrdered="${ref.order}", isContainer="${ref.container}", type="${package.name}::${ref.type}" opposite=""/>
+#end#end
+  </Class>
+#end#end
+## go through the enumerations
+#foreach($enum in $enumerationS)
+#if($enum.pID == $package.id)
+  <Enumeration name=${enum.name}>
+#foreach($sl in $stringLiteralS)
+#if(${sl.eID} == ${enum.id})
+   <EnumLiteral name="${sl.name}"/>    
+#end#end
+  </Enumeration>
+#end#end
+## go through the datatypes
+#foreach($dt in $datatypeS)
+#if($dt.pID == $package.id)
+    <DataType name="${dt.name}"/>
+#end#end
+ </Package>
+#end
+</Metamodel>
+
