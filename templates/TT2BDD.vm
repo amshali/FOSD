@@ -1,0 +1,1095 @@
+#set($MARKER="//----")
+#set($pkg="TT2BDD")
+#set($name=${truthTableS.get(0).name})
+${MARKER}src/${pkg}/${name}.java
+package $pkg;
+
+public class $name {
+
+	public int S;
+
+    public $name(String a, String b, String c, String d) {
+	
+		this.S = getBDT(a, b, c, d);
+		
+	}
+	
+##public static int getBDT(String a, String b, String c, String d) {
+public int getBDT(String a, String b, String c, String d) {
+
+    int A = -1;
+    int B = -1;
+    int C = -1;
+    int D = -1;
+	this.S = -1;
+
+    if ( !(a.equals("null")) ) {
+        A = Integer.parseInt(a);
+    }
+    if ( !(b.equals("null")) ) {
+        B = Integer.parseInt(b);
+    }	
+    if ( !(c.equals("null")) ) {
+        C = Integer.parseInt(c);
+    }
+    if ( !(d.equals("null")) ) {
+        D = Integer.parseInt(d);
+    }
+	
+    if (A == 0) {
+        if (B == 0) {
+            if (C == 0) {
+                if (D == 0) {
+#foreach($truthTable in $truthTableS)
+#if(${truthTable.A} == 0)
+#if(${truthTable.B} == 0)
+#if(${truthTable.C} == 0)
+#if(${truthTable.D} == 0)
+                    S = ${truthTable.S};  
+#end
+#end
+#end
+#end
+#end
+                } else if (D == 1) {
+#foreach($truthTable in $truthTableS)
+#if(${truthTable.A} == 0)
+#if(${truthTable.B} == 0)
+#if(${truthTable.C} == 0)
+#if(${truthTable.D} == 1)
+                    S = ${truthTable.S};  
+#end
+#end
+#end
+#end
+#end				
+                } else if (d.equals("null")) {
+#foreach($truthTable in $truthTableS)
+#if(${truthTable.A} == 0)
+#if(${truthTable.B} == 0)
+#if(${truthTable.C} == 0)
+#if(${truthTable.D} == "null")
+                    S = ${truthTable.S};  
+#end
+#end
+#end
+#end
+#end				
+                }
+            } else if (C == 1) {
+                if (D == 0) {
+#foreach($truthTable in $truthTableS)
+#if(${truthTable.A} == 0)
+#if(${truthTable.B} == 0)
+#if(${truthTable.C} == 1)
+#if(${truthTable.D} == 0)
+                    S = ${truthTable.S};  
+#end
+#end
+#end
+#end
+#end				
+                } else if (D == 1) {
+#foreach($truthTable in $truthTableS)
+#if(${truthTable.A} == 0)
+#if(${truthTable.B} == 0)
+#if(${truthTable.C} == 1)
+#if(${truthTable.D} == 1)
+                    S = ${truthTable.S};  
+#end
+#end
+#end
+#end
+#end
+                } else if (d.equals("null")) {
+#foreach($truthTable in $truthTableS)
+#if(${truthTable.A} == 0)
+#if(${truthTable.B} == 0)
+#if(${truthTable.C} == 1)
+#if(${truthTable.D} == "null")
+                    S = ${truthTable.S};  
+#end
+#end
+#end
+#end
+#end			
+                }
+            } else if (c.equals("null")) {
+                if (D == 0) {
+#foreach($truthTable in $truthTableS)
+#if(${truthTable.A} == 0)
+#if(${truthTable.B} == 0)
+#if(${truthTable.C} == "null")
+#if(${truthTable.D} == 0)
+                    S = ${truthTable.S};  
+#end
+#end
+#end
+#end
+#end
+                } else if (D == 1) {
+#foreach($truthTable in $truthTableS)
+#if(${truthTable.A} == 0)
+#if(${truthTable.B} == 0)
+#if(${truthTable.C} == "null")
+#if(${truthTable.D} == 1)
+                    S = ${truthTable.S};  
+#end
+#end
+#end
+#end
+#end				
+                } else if (d.equals("null")) {
+#foreach($truthTable in $truthTableS)
+#if(${truthTable.A} == 0)
+#if(${truthTable.B} == 0)
+#if(${truthTable.C} == "null")
+#if(${truthTable.D} == "null")
+                    S = ${truthTable.S};  
+#end
+#end
+#end
+#end
+#end	
+                }		
+			}
+        } else if (B == 1) {
+            if (C == 0) {
+                if (D == 0) {
+#foreach($truthTable in $truthTableS)
+#if(${truthTable.A} == 0)
+#if(${truthTable.B} == 1)
+#if(${truthTable.C} == 0)
+#if(${truthTable.D} == 0)
+                    S = ${truthTable.S};  
+#end
+#end
+#end
+#end
+#end
+                } else if (D == 1) {
+#foreach($truthTable in $truthTableS)
+#if(${truthTable.A} == 0)
+#if(${truthTable.B} == 1)
+#if(${truthTable.C} == 0)
+#if(${truthTable.D} == 1)
+                    S = ${truthTable.S};  
+#end
+#end
+#end
+#end
+#end				
+                } else if (d.equals("null")) {
+#foreach($truthTable in $truthTableS)
+#if(${truthTable.A} == 0)
+#if(${truthTable.B} == 1)
+#if(${truthTable.C} == 0)
+#if(${truthTable.D} == "null")
+                    S = ${truthTable.S};  
+#end
+#end
+#end
+#end
+#end
+                }
+            } else if (C == 1) {
+                if (D == 0) {
+#foreach($truthTable in $truthTableS)
+#if(${truthTable.A} == 0)
+#if(${truthTable.B} == 1)
+#if(${truthTable.C} == 1)
+#if(${truthTable.D} == 0)
+                    S = ${truthTable.S};  
+#end
+#end
+#end
+#end
+#end
+                } else if (D == 1) {
+#foreach($truthTable in $truthTableS)
+#if(${truthTable.A} == 0)
+#if(${truthTable.B} == 1)
+#if(${truthTable.C} == 1)
+#if(${truthTable.D} == 1)
+                    S = ${truthTable.S};  
+#end
+#end
+#end
+#end
+#end		
+                } else if (d.equals("null")) {
+#foreach($truthTable in $truthTableS)
+#if(${truthTable.A} == 0)
+#if(${truthTable.B} == 1)
+#if(${truthTable.C} == 1)
+#if(${truthTable.D} == "null")
+                    S = ${truthTable.S};  
+#end
+#end
+#end
+#end
+#end
+                }
+            } else if (c.equals("null")) {
+                if (D == 0) {
+#foreach($truthTable in $truthTableS)
+#if(${truthTable.A} == 0)
+#if(${truthTable.B} == 1)
+#if(${truthTable.C} == "null")
+#if(${truthTable.D} == 0)
+                    S = ${truthTable.S};  
+#end
+#end
+#end
+#end
+#end
+                } else if (D == 1) {
+#foreach($truthTable in $truthTableS)
+#if(${truthTable.A} == 0)
+#if(${truthTable.B} == 1)
+#if(${truthTable.C} == "null")
+#if(${truthTable.D} == 1)
+                    S = ${truthTable.S};  
+#end
+#end
+#end
+#end
+#end
+                } else if (d.equals("null")) {
+#foreach($truthTable in $truthTableS)
+#if(${truthTable.A} == 0)
+#if(${truthTable.B} == 1)
+#if(${truthTable.C} == "null")
+#if(${truthTable.D} == "null")
+                    S = ${truthTable.S};  
+#end
+#end
+#end
+#end
+#end
+                }		
+			}
+        } else if (b.equals("null")) {
+            if (C == 0) {
+                if (D == 0) {
+#foreach($truthTable in $truthTableS)
+#if(${truthTable.A} == 0)
+#if(${truthTable.B} == "null")
+#if(${truthTable.C} == 0)
+#if(${truthTable.D} == 0)
+                    S = ${truthTable.S};  
+#end
+#end
+#end
+#end
+#end
+                } else if (D == 1) {
+#foreach($truthTable in $truthTableS)
+#if(${truthTable.A} == 0)
+#if(${truthTable.B} == "null")
+#if(${truthTable.C} == 0)
+#if(${truthTable.D} == 1)
+                    S = ${truthTable.S};  
+#end
+#end
+#end
+#end
+#end
+                } else if (d.equals("null")) {
+#foreach($truthTable in $truthTableS)
+#if(${truthTable.A} == 0)
+#if(${truthTable.B} == "null")
+#if(${truthTable.C} == 0)
+#if(${truthTable.D} == "null")
+                    S = ${truthTable.S};  
+#end
+#end
+#end
+#end
+#end
+                }
+            } else if (C == 1) {
+                if (D == 0) {
+#foreach($truthTable in $truthTableS)
+#if(${truthTable.A} == 0)
+#if(${truthTable.B} == "null")
+#if(${truthTable.C} == 1)
+#if(${truthTable.D} == 0)
+                    S = ${truthTable.S};  
+#end
+#end
+#end
+#end
+#end
+                } else if (D == 1) {
+#foreach($truthTable in $truthTableS)
+#if(${truthTable.A} == 0)
+#if(${truthTable.B} == "null")
+#if(${truthTable.C} == 1)
+#if(${truthTable.D} == 1)
+                    S = ${truthTable.S};  
+#end
+#end
+#end
+#end
+#end
+                } else if (d.equals("null")) {
+#foreach($truthTable in $truthTableS)
+#if(${truthTable.A} == 0)
+#if(${truthTable.B} == "null")
+#if(${truthTable.C} == 1)
+#if(${truthTable.D} == "null")
+                    S = ${truthTable.S};  
+#end
+#end
+#end
+#end
+#end
+                }
+            } else if (c.equals("null")) {
+                if (D == 0) {
+#foreach($truthTable in $truthTableS)
+#if(${truthTable.A} == 0)
+#if(${truthTable.B} == "null")
+#if(${truthTable.C} == "null")
+#if(${truthTable.D} == 0)
+                    S = ${truthTable.S};  
+#end
+#end
+#end
+#end
+#end
+                } else if (D == 1) {
+#foreach($truthTable in $truthTableS)
+#if(${truthTable.A} == 0)
+#if(${truthTable.B} == "null")
+#if(${truthTable.C} == "null")
+#if(${truthTable.D} == 1)
+                    S = ${truthTable.S};  
+#end
+#end
+#end
+#end
+#end
+                } else if (d.equals("null")) {
+#foreach($truthTable in $truthTableS)
+#if(${truthTable.A} == 0)
+#if(${truthTable.B} == "null")
+#if(${truthTable.C} == "null")
+#if(${truthTable.D} == "null")
+                    S = ${truthTable.S};  
+#end
+#end
+#end
+#end
+#end
+                }		
+			}
+		}
+#####################################################
+    } else if (A == 1) {
+        if (B == 0) {
+            if (C == 0) {
+                if (D == 0) {
+#foreach($truthTable in $truthTableS)
+#if(${truthTable.A} == 1)
+#if(${truthTable.B} == 0)
+#if(${truthTable.C} == 0)
+#if(${truthTable.D} == 0)
+                    S = ${truthTable.S};  
+#end
+#end
+#end
+#end
+#end
+                } else if (D == 1) {
+#foreach($truthTable in $truthTableS)
+#if(${truthTable.A} == 1)
+#if(${truthTable.B} == 0)
+#if(${truthTable.C} == 0)
+#if(${truthTable.D} == 1)
+                    S = ${truthTable.S};  
+#end
+#end
+#end
+#end
+#end				
+                } else if (d.equals("null")) {
+#foreach($truthTable in $truthTableS)
+#if(${truthTable.A} == 1)
+#if(${truthTable.B} == 0)
+#if(${truthTable.C} == 0)
+#if(${truthTable.D} == "null")
+                    S = ${truthTable.S};  
+#end
+#end
+#end
+#end
+#end				
+                }
+            } else if (C == 1) {
+                if (D == 0) {
+#foreach($truthTable in $truthTableS)
+#if(${truthTable.A} == 1)
+#if(${truthTable.B} == 0)
+#if(${truthTable.C} == 1)
+#if(${truthTable.D} == 0)
+                    S = ${truthTable.S};  
+#end
+#end
+#end
+#end
+#end				
+                } else if (D == 1) {
+#foreach($truthTable in $truthTableS)
+#if(${truthTable.A} == 1)
+#if(${truthTable.B} == 0)
+#if(${truthTable.C} == 1)
+#if(${truthTable.D} == 1)
+                    S = ${truthTable.S};  
+#end
+#end
+#end
+#end
+#end
+                } else if (d.equals("null")) {
+#foreach($truthTable in $truthTableS)
+#if(${truthTable.A} == 1)
+#if(${truthTable.B} == 0)
+#if(${truthTable.C} == 1)
+#if(${truthTable.D} == "null")
+                    S = ${truthTable.S};  
+#end
+#end
+#end
+#end
+#end			
+                }
+            } else if (c.equals("null")) {
+                if (D == 0) {
+#foreach($truthTable in $truthTableS)
+#if(${truthTable.A} == 1)
+#if(${truthTable.B} == 0)
+#if(${truthTable.C} == "null")
+#if(${truthTable.D} == 0)
+                    S = ${truthTable.S};  
+#end
+#end
+#end
+#end
+#end
+                } else if (D == 1) {
+#foreach($truthTable in $truthTableS)
+#if(${truthTable.A} == 1)
+#if(${truthTable.B} == 0)
+#if(${truthTable.C} == "null")
+#if(${truthTable.D} == 1)
+                    S = ${truthTable.S};  
+#end
+#end
+#end
+#end
+#end				
+                } else if (d.equals("null")) {
+#foreach($truthTable in $truthTableS)
+#if(${truthTable.A} == 1)
+#if(${truthTable.B} == 0)
+#if(${truthTable.C} == "null")
+#if(${truthTable.D} == "null")
+                    S = ${truthTable.S};  
+#end
+#end
+#end
+#end
+#end	
+                }		
+			}
+        } else if (B == 1) {
+            if (C == 0) {
+                if (D == 0) {
+#foreach($truthTable in $truthTableS)
+#if(${truthTable.A} == 1)
+#if(${truthTable.B} == 1)
+#if(${truthTable.C} == 0)
+#if(${truthTable.D} == 0)
+                    S = ${truthTable.S};  
+#end
+#end
+#end
+#end
+#end
+                } else if (D == 1) {
+#foreach($truthTable in $truthTableS)
+#if(${truthTable.A} == 1)
+#if(${truthTable.B} == 1)
+#if(${truthTable.C} == 0)
+#if(${truthTable.D} == 1)
+                    S = ${truthTable.S};  
+#end
+#end
+#end
+#end
+#end				
+                } else if (d.equals("null")) {
+#foreach($truthTable in $truthTableS)
+#if(${truthTable.A} == 1)
+#if(${truthTable.B} == 1)
+#if(${truthTable.C} == 0)
+#if(${truthTable.D} == "null")
+                    S = ${truthTable.S};  
+#end
+#end
+#end
+#end
+#end
+                }
+            } else if (C == 1) {
+                if (D == 0) {
+#foreach($truthTable in $truthTableS)
+#if(${truthTable.A} == 1)
+#if(${truthTable.B} == 1)
+#if(${truthTable.C} == 1)
+#if(${truthTable.D} == 0)
+                    S = ${truthTable.S};  
+#end
+#end
+#end
+#end
+#end
+                } else if (D == 1) {
+#foreach($truthTable in $truthTableS)
+#if(${truthTable.A} == 1)
+#if(${truthTable.B} == 1)
+#if(${truthTable.C} == 1)
+#if(${truthTable.D} == 1)
+                    S = ${truthTable.S};  
+#end
+#end
+#end
+#end
+#end		
+                } else if (d.equals("null")) {
+#foreach($truthTable in $truthTableS)
+#if(${truthTable.A} == 1)
+#if(${truthTable.B} == 1)
+#if(${truthTable.C} == 1)
+#if(${truthTable.D} == "null")
+                    S = ${truthTable.S};  
+#end
+#end
+#end
+#end
+#end
+                }
+            } else if (c.equals("null")) {
+                if (D == 0) {
+#foreach($truthTable in $truthTableS)
+#if(${truthTable.A} == 1)
+#if(${truthTable.B} == 1)
+#if(${truthTable.C} == "null")
+#if(${truthTable.D} == 0)
+                    S = ${truthTable.S};  
+#end
+#end
+#end
+#end
+#end
+                } else if (D == 1) {
+#foreach($truthTable in $truthTableS)
+#if(${truthTable.A} == 1)
+#if(${truthTable.B} == 1)
+#if(${truthTable.C} == "null")
+#if(${truthTable.D} == 1)
+                    S = ${truthTable.S};  
+#end
+#end
+#end
+#end
+#end
+                } else if (d.equals("null")) {
+#foreach($truthTable in $truthTableS)
+#if(${truthTable.A} == 1)
+#if(${truthTable.B} == 1)
+#if(${truthTable.C} == "null")
+#if(${truthTable.D} == "null")
+                    S = ${truthTable.S};  
+#end
+#end
+#end
+#end
+#end
+                }		
+			}
+        } else if (b.equals("null")) {
+            if (C == 0) {
+                if (D == 0) {
+#foreach($truthTable in $truthTableS)
+#if(${truthTable.A} == 1)
+#if(${truthTable.B} == "null")
+#if(${truthTable.C} == 0)
+#if(${truthTable.D} == 0)
+                    S = ${truthTable.S};  
+#end
+#end
+#end
+#end
+#end
+                } else if (D == 1) {
+#foreach($truthTable in $truthTableS)
+#if(${truthTable.A} == 1)
+#if(${truthTable.B} == "null")
+#if(${truthTable.C} == 0)
+#if(${truthTable.D} == 1)
+                    S = ${truthTable.S};  
+#end
+#end
+#end
+#end
+#end
+                } else if (d.equals("null")) {
+#foreach($truthTable in $truthTableS)
+#if(${truthTable.A} == 1)
+#if(${truthTable.B} == "null")
+#if(${truthTable.C} == 0)
+#if(${truthTable.D} == "null")
+                    S = ${truthTable.S};  
+#end
+#end
+#end
+#end
+#end
+                }
+            } else if (C == 1) {
+                if (D == 0) {
+#foreach($truthTable in $truthTableS)
+#if(${truthTable.A} == 1)
+#if(${truthTable.B} == "null")
+#if(${truthTable.C} == 1)
+#if(${truthTable.D} == 0)
+                    S = ${truthTable.S};  
+#end
+#end
+#end
+#end
+#end
+                } else if (D == 1) {
+#foreach($truthTable in $truthTableS)
+#if(${truthTable.A} == 1)
+#if(${truthTable.B} == "null")
+#if(${truthTable.C} == 1)
+#if(${truthTable.D} == 1)
+                    S = ${truthTable.S};  
+#end
+#end
+#end
+#end
+#end
+                } else if (d.equals("null")) {
+#foreach($truthTable in $truthTableS)
+#if(${truthTable.A} == 1)
+#if(${truthTable.B} == "null")
+#if(${truthTable.C} == 1)
+#if(${truthTable.D} == "null")
+                    S = ${truthTable.S};  
+#end
+#end
+#end
+#end
+#end
+                }
+            } else if (c.equals("null")) {
+                if (D == 0) {
+#foreach($truthTable in $truthTableS)
+#if(${truthTable.A} == 1)
+#if(${truthTable.B} == "null")
+#if(${truthTable.C} == "null")
+#if(${truthTable.D} == 0)
+                    S = ${truthTable.S};  
+#end
+#end
+#end
+#end
+#end
+                } else if (D == 1) {
+#foreach($truthTable in $truthTableS)
+#if(${truthTable.A} == 1)
+#if(${truthTable.B} == "null")
+#if(${truthTable.C} == "null")
+#if(${truthTable.D} == 1)
+                    S = ${truthTable.S};  
+#end
+#end
+#end
+#end
+#end
+                } else if (d.equals("null")) {
+#foreach($truthTable in $truthTableS)
+#if(${truthTable.A} == 1)
+#if(${truthTable.B} == "null")
+#if(${truthTable.C} == "null")
+#if(${truthTable.D} == "null")
+                    S = ${truthTable.S};  
+#end
+#end
+#end
+#end
+#end
+                }		
+			}
+		}
+#############################################
+    } else if (a.equals("null")) {
+        if (B == 0) {
+            if (C == 0) {
+                if (D == 0) {
+#foreach($truthTable in $truthTableS)
+#if(${truthTable.A} == "null")
+#if(${truthTable.B} == 0)
+#if(${truthTable.C} == 0)
+#if(${truthTable.D} == 0)
+                    S = ${truthTable.S};  
+#end
+#end
+#end
+#end
+#end
+                } else if (D == 1) {
+#foreach($truthTable in $truthTableS)
+#if(${truthTable.A} == "null")
+#if(${truthTable.B} == 0)
+#if(${truthTable.C} == 0)
+#if(${truthTable.D} == 1)
+                    S = ${truthTable.S};  
+#end
+#end
+#end
+#end
+#end				
+                } else if (d.equals("null")) {
+#foreach($truthTable in $truthTableS)
+#if(${truthTable.A} == "null")
+#if(${truthTable.B} == 0)
+#if(${truthTable.C} == 0)
+#if(${truthTable.D} == "null")
+                    S = ${truthTable.S};  
+#end
+#end
+#end
+#end
+#end				
+                }
+            } else if (C == 1) {
+                if (D == 0) {
+#foreach($truthTable in $truthTableS)
+#if(${truthTable.A} == "null")
+#if(${truthTable.B} == 0)
+#if(${truthTable.C} == 1)
+#if(${truthTable.D} == 0)
+                    S = ${truthTable.S};  
+#end
+#end
+#end
+#end
+#end				
+                } else if (D == 1) {
+#foreach($truthTable in $truthTableS)
+#if(${truthTable.A} == "null")
+#if(${truthTable.B} == 0)
+#if(${truthTable.C} == 1)
+#if(${truthTable.D} == 1)
+                    S = ${truthTable.S};  
+#end
+#end
+#end
+#end
+#end
+                } else if (d.equals("null")) {
+#foreach($truthTable in $truthTableS)
+#if(${truthTable.A} == "null")
+#if(${truthTable.B} == 0)
+#if(${truthTable.C} == 1)
+#if(${truthTable.D} == "null")
+                    S = ${truthTable.S};  
+#end
+#end
+#end
+#end
+#end			
+                }
+            } else if (c.equals("null")) {
+                if (D == 0) {
+#foreach($truthTable in $truthTableS)
+#if(${truthTable.A} == "null")
+#if(${truthTable.B} == 0)
+#if(${truthTable.C} == "null")
+#if(${truthTable.D} == 0)
+                    S = ${truthTable.S};  
+#end
+#end
+#end
+#end
+#end
+                } else if (D == 1) {
+#foreach($truthTable in $truthTableS)
+#if(${truthTable.A} == "null")
+#if(${truthTable.B} == 0)
+#if(${truthTable.C} == "null")
+#if(${truthTable.D} == 1)
+                    S = ${truthTable.S};  
+#end
+#end
+#end
+#end
+#end				
+                } else if (d.equals("null")) {
+#foreach($truthTable in $truthTableS)
+#if(${truthTable.A} == "null")
+#if(${truthTable.B} == 0)
+#if(${truthTable.C} == "null")
+#if(${truthTable.D} == "null")
+                    S = ${truthTable.S};  
+#end
+#end
+#end
+#end
+#end	
+                }		
+			}
+        } else if (B == 1) {
+            if (C == 0) {
+                if (D == 0) {
+#foreach($truthTable in $truthTableS)
+#if(${truthTable.A} == "null")
+#if(${truthTable.B} == 1)
+#if(${truthTable.C} == 0)
+#if(${truthTable.D} == 0)
+                    S = ${truthTable.S};  
+#end
+#end
+#end
+#end
+#end
+                } else if (D == 1) {
+#foreach($truthTable in $truthTableS)
+#if(${truthTable.A} == "null")
+#if(${truthTable.B} == 1)
+#if(${truthTable.C} == 0)
+#if(${truthTable.D} == 1)
+                    S = ${truthTable.S};  
+#end
+#end
+#end
+#end
+#end				
+                } else if (d.equals("null")) {
+#foreach($truthTable in $truthTableS)
+#if(${truthTable.A} == "null")
+#if(${truthTable.B} == 1)
+#if(${truthTable.C} == 0)
+#if(${truthTable.D} == "null")
+                    S = ${truthTable.S};  
+#end
+#end
+#end
+#end
+#end
+                }
+            } else if (C == 1) {
+                if (D == 0) {
+#foreach($truthTable in $truthTableS)
+#if(${truthTable.A} == "null")
+#if(${truthTable.B} == 1)
+#if(${truthTable.C} == 1)
+#if(${truthTable.D} == 0)
+                    S = ${truthTable.S};  
+#end
+#end
+#end
+#end
+#end
+                } else if (D == 1) {
+#foreach($truthTable in $truthTableS)
+#if(${truthTable.A} == "null")
+#if(${truthTable.B} == 1)
+#if(${truthTable.C} == 1)
+#if(${truthTable.D} == 1)
+                    S = ${truthTable.S};  
+#end
+#end
+#end
+#end
+#end		
+                } else if (d.equals("null")) {
+#foreach($truthTable in $truthTableS)
+#if(${truthTable.A} == "null")
+#if(${truthTable.B} == 1)
+#if(${truthTable.C} == 1)
+#if(${truthTable.D} == "null")
+                    S = ${truthTable.S};  
+#end
+#end
+#end
+#end
+#end
+                }
+            } else if (c.equals("null")) {
+                if (D == 0) {
+#foreach($truthTable in $truthTableS)
+#if(${truthTable.A} == "null")
+#if(${truthTable.B} == 1)
+#if(${truthTable.C} == "null")
+#if(${truthTable.D} == 0)
+                    S = ${truthTable.S};  
+#end
+#end
+#end
+#end
+#end
+                } else if (D == 1) {
+#foreach($truthTable in $truthTableS)
+#if(${truthTable.A} == "null")
+#if(${truthTable.B} == 1)
+#if(${truthTable.C} == "null")
+#if(${truthTable.D} == 1)
+                    S = ${truthTable.S};  
+#end
+#end
+#end
+#end
+#end
+                } else if (d.equals("null")) {
+#foreach($truthTable in $truthTableS)
+#if(${truthTable.A} == "null")
+#if(${truthTable.B} == 1)
+#if(${truthTable.C} == "null")
+#if(${truthTable.D} == "null")
+                    S = ${truthTable.S};  
+#end
+#end
+#end
+#end
+#end
+                }		
+			}
+        } else if (b.equals("null")) {
+            if (C == 0) {
+                if (D == 0) {
+#foreach($truthTable in $truthTableS)
+#if(${truthTable.A} == "null")
+#if(${truthTable.B} == "null")
+#if(${truthTable.C} == 0)
+#if(${truthTable.D} == 0)
+                    S = ${truthTable.S};  
+#end
+#end
+#end
+#end
+#end
+                } else if (D == 1) {
+#foreach($truthTable in $truthTableS)
+#if(${truthTable.A} == "null")
+#if(${truthTable.B} == "null")
+#if(${truthTable.C} == 0)
+#if(${truthTable.D} == 1)
+                    S = ${truthTable.S};  
+#end
+#end
+#end
+#end
+#end
+                } else if (d.equals("null")) {
+#foreach($truthTable in $truthTableS)
+#if(${truthTable.A} == "null")
+#if(${truthTable.B} == "null")
+#if(${truthTable.C} == 0)
+#if(${truthTable.D} == "null")
+                    S = ${truthTable.S};  
+#end
+#end
+#end
+#end
+#end
+                }
+            } else if (C == 1) {
+                if (D == 0) {
+#foreach($truthTable in $truthTableS)
+#if(${truthTable.A} == "null")
+#if(${truthTable.B} == "null")
+#if(${truthTable.C} == 1)
+#if(${truthTable.D} == 0)
+                    S = ${truthTable.S};  
+#end
+#end
+#end
+#end
+#end
+                } else if (D == 1) {
+#foreach($truthTable in $truthTableS)
+#if(${truthTable.A} == "null")
+#if(${truthTable.B} == "null")
+#if(${truthTable.C} == 1)
+#if(${truthTable.D} == 1)
+                    S = ${truthTable.S};  
+#end
+#end
+#end
+#end
+#end
+                } else if (d.equals("null")) {
+#foreach($truthTable in $truthTableS)
+#if(${truthTable.A} == "null")
+#if(${truthTable.B} == "null")
+#if(${truthTable.C} == 1)
+#if(${truthTable.D} == "null")
+                    S = ${truthTable.S};  
+#end
+#end
+#end
+#end
+#end
+                }
+            } else if (c.equals("null")) {
+                if (D == 0) {
+#foreach($truthTable in $truthTableS)
+#if(${truthTable.A} == "null")
+#if(${truthTable.B} == "null")
+#if(${truthTable.C} == "null")
+#if(${truthTable.D} == 0)
+                    S = ${truthTable.S};  
+#end
+#end
+#end
+#end
+#end
+                } else if (D == 1) {
+#foreach($truthTable in $truthTableS)
+#if(${truthTable.A} == "null")
+#if(${truthTable.B} == "null")
+#if(${truthTable.C} == "null")
+#if(${truthTable.D} == 1)
+                    S = ${truthTable.S};  
+#end
+#end
+#end
+#end
+#end
+                } else if (d.equals("null")) {
+#foreach($truthTable in $truthTableS)
+#if(${truthTable.A} == "null")
+#if(${truthTable.B} == "null")
+#if(${truthTable.C} == "null")
+#if(${truthTable.D} == "null")
+                    S = ${truthTable.S};  
+#end
+#end
+#end
+#end
+#end
+                }		
+			}
+		}
+    }
+	
+	return S;
+}
+}
