@@ -36,7 +36,7 @@ https://github.com/amshali/FOSD/zipball/master
 
 This will give you the latest version of the project in a zip file. In Eclipse
 go to _File_ menu and select _Import_. From there, choose the _Existing Projects
-into Workspace_. Then select the _Select archive file:_ and finish by selecting 
+into Workspace_. Then select the _Select archive file_ and finish by selecting 
 the downloaded zip file and clicking on Finish button.
 
 
