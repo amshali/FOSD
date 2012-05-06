@@ -13,7 +13,7 @@ Amin Shali (amshali@cs.utexas.edu), Joyce Ho (joyceho@utexas.edu)
 Our tool can generate the output text either in the command line or in Eclipse. 
 Our tool takes in the following parameters:
 
-usage:
+Usage:
 
         -cg <cg>   Context Generator(optional)
         -i <i>     Input Prolog Filename
@@ -22,4 +22,9 @@ usage:
 For example:
 
         $ java -jar release/m2t-1.0.jar -i models/family.pl -t Family2Person.vm
+
+### Runtime Requirements:
+
+You need Java 1.6+ to run the project. 
+
 
