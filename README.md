@@ -32,7 +32,7 @@ Compliance is set to at least 1.6.
 
 In order to import the project into eclipse simply click on the following URL:
 
-      https://github.com/amshali/FOSD/zipball/master
+        [Zip](https://github.com/amshali/FOSD/zipball/master)
 
 This will give you the latest version of the project in a zip file. 
 
