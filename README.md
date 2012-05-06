@@ -15,7 +15,7 @@ Our tool takes in the following parameters:
 
 usage:
 
-        -cg <cg>   Context Generator
+        -cg <cg>   Context Generator(optional)
         -i <i>     Input Prolog Filename
         -t <t>     Velocity Template
 
