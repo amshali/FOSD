@@ -38,7 +38,8 @@ go to _File_ menu and select _Import_. From there, choose the _Existing Projects
 into Workspace_. Then select the _Select archive file_ and finish by selecting 
 the downloaded zip file and clicking on Finish button.
 
-Make sure your workspace Java Compiler Compliance is set to at least 1.6.
+**Note:** Make sure your workspace Java Compiler Compliance is set to at least 
+1.6.
 
 
 
