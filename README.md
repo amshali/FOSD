@@ -13,7 +13,7 @@ Amin Shali (amshali@cs.utexas.edu), Joyce Ho (joyceho@utexas.edu)
 Our tool can generate the output text either in the command line or in Eclipse. 
 Our tool takes in the following parameters:
 
-usage: FOSD: Model to Text
+usage:
 
         -cg <cg>   Context Generator
         -i <i>     Input Prolog Filename
