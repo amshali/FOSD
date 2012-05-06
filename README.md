@@ -31,7 +31,8 @@ Compliance is set to at least 1.6.
 ### Importing project into Eclipse
 
 In order to import the project into eclipse simply click on the following URL:
-https://github.com/amshali/FOSD/zipball/master
+
+        https://github.com/amshali/FOSD/zipball/master
 
 This will give you the latest version of the project in a zip file. 
 
