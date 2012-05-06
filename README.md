@@ -14,10 +14,12 @@ Our tool can generate the output text either in the command line or in Eclipse.
 Our tool takes in the following parameters:
 
 usage: FOSD: Model to Text
- -cg <cg>   Context Generator
- -i <i>     Input Prolog Filename
- -t <t>     Velocity Template
+
+        -cg <cg>   Context Generator
+        -i <i>     Input Prolog Filename
+        -t <t>     Velocity Template
 
 For example:
-$ java -jar release/m2t-1.0.jar -i models/family.pl -t Family2Person.vm
+
+        $ java -jar release/m2t-1.0.jar -i models/family.pl -t Family2Person.vm
 
