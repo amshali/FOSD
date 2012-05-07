@@ -88,7 +88,9 @@ public class Main {
           }
           filename = line.substring(marker.length());
           File f = new File(filename);
-          f.getParentFile().mkdirs();
+          if (f.getParentFile() != null && !f.getParentFile().exists()) {
+            f.getParentFile().mkdirs();
+          }
           out = new PrintStream(f);
         } else {
           if (out != null)

@@ -1,5 +1,5 @@
 #set($MARKER="//----")
-${MARKER}Current.java
+${MARKER}tmp/Current.java
 package fsm;
 
 class Current {
@@ -13,7 +13,7 @@ class Current {
 
 
 #foreach($node in $nodeS) 
-${MARKER}${node.name}.java
+${MARKER}tmp/${node.name}.java
 package fsm;
 
 class $node.name extends Current {
