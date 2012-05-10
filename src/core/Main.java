@@ -12,6 +12,9 @@ import java.util.Properties;
 import org.apache.velocity.Template;
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.Velocity;
+import org.apache.velocity.exception.ParseErrorException;
+
+import com.sun.org.apache.xerces.internal.impl.xpath.regex.ParseException;
 
 public class Main {
   public static void main(String[] args) {
@@ -90,8 +93,9 @@ public class Main {
       System.out.println("The context generator class not found. Please make "
           + "sure it is in the java classpath.");
       System.exit(1);
-    } catch (Exception e) {
-      e.printStackTrace();
+    } 
+    catch (Exception e) {
+      System.err.println(e.getMessage());
     }
   }
 
