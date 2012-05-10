@@ -21,7 +21,7 @@ Usage:
 
 For example:
 
-    $ java -jar release/m2t-1.0.jar models/family.pl templates/Family2Person.vm
+    $ java -jar release/vm2t.jar examples/Family2Person/family.pl examples/Family2Person/Family2Person.vm
 
 ### Runtime Requirements:
 
