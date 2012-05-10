@@ -12,9 +12,6 @@ import java.util.Properties;
 import org.apache.velocity.Template;
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.Velocity;
-import org.apache.velocity.exception.ParseErrorException;
-
-import com.sun.org.apache.xerces.internal.impl.xpath.regex.ParseException;
 
 public class Main {
   public static void main(String[] args) {
@@ -63,6 +60,7 @@ public class Main {
         templatePath = templateFile.getParentFile().getCanonicalPath();
       }
       p.setProperty("file.resource.loader.path", templatePath);
+      Velocity.setProperty(Velocity.RUNTIME_LOG_LOGSYSTEM, new CustomLog());
       Velocity.init(p);
 
       Model m = new Model(prologFile);
