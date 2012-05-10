@@ -12,7 +12,6 @@
             <zipfileset excludes="META-INF/*.SF" src="/home/amshali/src/java-workspace/FOSD/lib/commons-collections.jar"/>
             <zipfileset excludes="META-INF/*.SF" src="/home/amshali/src/java-workspace/FOSD/lib/velocity.jar"/>
             <zipfileset excludes="META-INF/*.SF" src="/home/amshali/src/java-workspace/FOSD/lib/commons-lang.jar"/>
-            <zipfileset excludes="META-INF/*.SF" src="/home/amshali/src/java-workspace/FOSD/lib/commons-cli-1.2.jar"/>
         </jar>
     </target>
 </project>

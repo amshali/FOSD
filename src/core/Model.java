@@ -1,6 +1,7 @@
 package core;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -17,7 +18,7 @@ public class Model {
   private Map<String,List<String>> schemas = 
     new HashMap<String,List<String>>();
 
-  public Model(String infile) {
+  public Model(File infile) {
     try {
       // 1st pass for schemas.
       BufferedReader br = new BufferedReader(new InputStreamReader(
