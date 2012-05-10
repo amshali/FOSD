@@ -1,5 +1,5 @@
 % Family Table (ID, Last Name)
-% schema:family,id,lastname
+% schema : family , id , lastname
 family(1, 'March').
 family(2, 'Sailor').
 

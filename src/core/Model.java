@@ -26,7 +26,7 @@ public class Model {
       String line = null;
       while ((line = br.readLine()) != null) {
         line = line.trim();
-        if (line.matches("%\\s*schema:.*")) {
+        if (line.matches("%\\s*schema\\s*:.*")) {
           String[] names = line.split(":")[1].split(",");
           List<String> columnNames = new ArrayList<String>();
           for (String name: names) columnNames.add(name.trim());
