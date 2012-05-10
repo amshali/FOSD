@@ -42,8 +42,6 @@ the downloaded zip file and clicking on _Finish_ button.
 **Note:** Make sure your workspace Java Compiler Compliance is set to at least 
 1.6.
 
-
-
-
-
+**Note:** This youtube video shows how to import the project into Eclipse:
+http://youtu.be/iFGAz3PO1RY
 
