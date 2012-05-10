@@ -1,0 +1,103 @@
+## SET VARIABLES
+#set($MARKER="//----")
+##
+#foreach($class in $classS)
+${MARKER}src/UML2Java/${class.name}.java
+## DETERMINE IF CLASS INHERITS
+#set($extends=0)
+#if(${class.parentId} != "0")
+#set($extends=1)
+#set($superId=${class.parentId})
+#end
+
+## DECLARE THE PACKAGE
+#foreach($namespace in $namespaceS)
+#foreach($package in $packageS)
+#if(${namespace.ownerId} == ${class.id})
+#if(${package.ownerId} == ${class.id})
+package ${namespace.name}.${package.name};
+#end
+#end
+#end ##foreach
+#end ##foreach
+	
+## FOR CURRENT CLASS, GET NUMBER OF ATTRIBUTES ####################
+#set($attrSize=0)
+#foreach($attr in $attrS)
+#if(${attr.ownerId} == ${class.id})
+#set($attrSize=$attrSize + 1)
+#end
+#end
+#set($count1=1)
+###################################################################
+#if($extends == 0)
+${class.visibility}#if(${class.isAbstract} == true) abstract#end class ${class.name} {
+#else
+${class.visibility}#if(${class.isAbstract} == true) abstract#end class ${class.name} extends #foreach($class in $classS)#if(${class.id} == $superId)${class.name}#end#end {
+#end
+
+#foreach($attr in $attrS)
+#if(${attr.ownerId} == ${class.id})
+    ${attr.visibility} ${attr.ownerScope} ${attr.type} ${attr.name};
+#end
+#end
+
+    /**
+     * Empty constructor for class ${class.name}
+     */
+    ${class.visibility} ${class.name} () {
+    }
+	
+    /**
+     * Constructor for class ${class.name}
+     */
+    ${class.visibility} ${class.name} (#foreach($attr in $attrS)#if(${attr.ownerId} == ${class.id})#if($count1 < $attrSize)${attr.type} ${attr.name}, #else${attr.type} ${attr.name}#end #set($count1=$count1 + 1)#end#end) {
+#foreach($attr in $attrS)
+#if(${attr.ownerId} == ${class.id})
+    this.${attr.name} = ${attr.name};
+#end
+#end
+    }
+
+
+    // Get/Set methods
+#foreach($attr in $attrS)
+#if(${attr.ownerId} == ${class.id})
+    public ${attr.type} get${attr.name.substring(0,1).toUpperCase()}${attr.name.substring(1)}() {
+        return this.${attr.name};
+    }
+	
+    public void set${attr.name.substring(0,1).toUpperCase()}${attr.name.substring(1)}(${attr.type} ${attr.name}) {
+		this.${attr.name} = ${attr.name};
+        return;
+    }
+#end
+#end
+
+
+    // Class methods
+#foreach($operation in $operationS)
+#if(${operation.ownerId} == ${class.id})
+#set($params=0)
+#set($count1=1)
+#foreach($parameter in $parameterS)
+#if(${parameter.operationId} == ${operation.id})
+#set($params=$params + 1)
+#end
+#end
+    ${operation.visibility} ${operation.ownerScope} ${operation.type} ${operation.name}(#foreach($parameter in $parameterS)#if(${parameter.operationId} == ${operation.id})#if($count1 < $params)${parameter.type} ${parameter.name}, #else${parameter.type} ${parameter.name}#end #set($count1=$count1 + 1)#end#end) {
+        // Fill in method implementation details
+    }
+	
+#end
+#end
+}
+
+	
+#end ##foreach $class
+
+##foreach($operation in $operationS)
+##foreach($attribute in $attributeS)
+##foreach($parameter in $parameterS)
+
+

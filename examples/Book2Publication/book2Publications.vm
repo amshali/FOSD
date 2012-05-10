@@ -1,0 +1,32 @@
+#set($MARKER="//----")
+${MARKER}src/Publication.java
+public class Publication {
+   // data fields
+   String pubType;
+   String author;
+   int pages;
+   
+   public Publication(String pubType, String author, int pages) {
+      this.pubType = pubType;
+      this.author = author;
+      this.pages = pages;
+   }
+   
+   public String getAuthor() {
+      return this.author;
+   }
+   
+   public int getPages() {
+      return this.pages;
+   }
+}
+${MARKER}src/pubMain.java
+public class pubMain {
+   public static void main(String[] args) {
+#set($num=0)
+#foreach($pub in $publicationS)
+#set($num=$num + 1)
+      Publication p${num} = new Publication("${pub.type}", "${pub.author}", ${pub.pages});
+#end
+   }
+}
