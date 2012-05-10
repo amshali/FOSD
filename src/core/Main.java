@@ -26,6 +26,10 @@ public class Main {
     } else if (args.length == 4) {
       if (args[0].equals("-cg")) {
         contextGenClassName = args[1];
+      } else {
+        System.out
+            .println("Usage: [-cg ContextGeneratorClass] prolog-file template-file");
+        System.exit(0);
       }
       prologFileName = args[2];
       templateFileName = args[3];
@@ -83,8 +87,8 @@ public class Main {
         splitter(writer.toString(), context.get("MARKER").toString());
       }
     } catch (ClassNotFoundException e) {
-      System.out.println("The context generator class not found. Please make " +
-      		"sure it is in the java classpath.");
+      System.out.println("The context generator class not found. Please make "
+          + "sure it is in the java classpath.");
       System.exit(1);
     } catch (Exception e) {
       e.printStackTrace();
