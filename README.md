@@ -16,13 +16,12 @@ Our tool takes in the following parameters:
 
 Usage:
 
-        -cg <cg>   Context Generator(optional)
-        -i <i>     Input Prolog Filename
-        -t <t>     Velocity Template
+    [-cg ContextGeneratorClass] prolog-file template-file
+
 
 For example:
 
-        $ java -jar release/m2t-1.0.jar -i models/family.pl -t Family2Person.vm
+    $ java -jar release/m2t-1.0.jar models/family.pl templates/Family2Person.vm
 
 ### Runtime Requirements:
 
