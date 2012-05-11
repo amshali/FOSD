@@ -1,0 +1,41 @@
+#set($MARKER="//----")
+${MARKER}src/j2t/MethodCaller.java
+public class MethodCaller {
+#foreach($method in $methodS)
+  
+#foreach($class in $classS)
+#if(${method.className} == ${class.id})
+#set($tmp = ${class.name})
+#end
+#end
+  public int numCall_${tmp}_${method.name}() {
+    return 0;
+  }
+#end
+}
+
+#foreach($methodOuter in $methodS)
+#foreach($class in $classS)
+#if(${methodOuter.className} == ${class.id})
+#set($tmp = ${class.name})
+#end
+#end
+${MARKER}src/j2t/${tmp}_${methodOuter.name}.java
+class ${tmp}_${methodOuter.name} extends MethodCaller {
+#foreach($method in $methodS)
+#set($tmp2 = 0)
+#foreach($methodCall in $methodCallS)
+#if($methodCall.caller == $methodOuter.id && $methodCall.callee == $method.id)
+#set($tmp2 = $tmp2 + 1)
+#end
+#end
+#if($tmp2 != 0)
+  
+  public int numCall_${tmp}_${method.name}() {
+    return ${tmp2};
+  }
+#end
+#end
+}
+
+#end
